@@ -1,0 +1,30 @@
+version: "3.5"
+services:
+  api:
+    build: .
+    ports:
+    - "3000:3000"
+    environment:
+      DATABASE_HOST: "postgres"
+      DATABASE_PORT: "5432"
+      DATABASE_USER: "testapi"
+      DATABASE_PASSWORD: "test1234"
+      DATABASE_SCHEMA: "testapi"
+  postgres:
+    image: "postgres:12"
+    environment:
+      POSTGRES_PASSWORD: "test1234"
+      POSTGRES_USER: "testapi"
+      POSTGRES_DB: "testapi"
+  pgadmin:
+    image: "dpage/pgadmin4:latest"
+    ports: 
+    - "54321:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "test@example.com"
+      PGADMIN_DEFAULT_PASSWORD: "test1234"
+networks:
+  default:
+    name: "backend_development"
+    driver: "bridge"
+       

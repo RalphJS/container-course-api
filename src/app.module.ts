@@ -7,11 +7,11 @@ import { ServiceModule } from './service/service.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'assuresoft',
-      database: 'test',
+      host: process.env.DATABASE_HOST || 'localhost',
+      port: parseInt(process.env.DATABASE_PORT) || 5432,
+      username: process.env.DATABASE_USER || 'postgres',
+      password: process.env.DATABASE_PASSWORD || 'test1234',
+      database: process.env.DATABASE_SCHEMA || 'postgres',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
